@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import {
   View,
   StyleSheet,
@@ -15,13 +15,36 @@ export default function App() {
     const toValue = open ? 0 : 1;
     Animated.spring(offset, {
       toValue,
-      friction: 3,
+      friction: 5,
     }).start();
     open = !open;
     console.log(toValue);
   }, []);
 
-  const animation = {
+  const sendAnimation = {
+    transform: [
+      { scale: offset },
+      {
+        translateY: offset.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -139],
+        }),
+      },
+    ],
+  };
+
+  const questionAnimation = {
+    transform: [
+      { scale: offset },
+      {
+        translateY: offset.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -95],
+        }),
+      },
+    ],
+  };
+  const heartAnimation = {
     transform: [
       { scale: offset },
       {
@@ -46,7 +69,23 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback>
-        <Animated.View style={[styles.subButton, animation]}>
+        <Animated.View
+          style={[styles.subButton, styles.subMenu, sendAnimation]}
+        >
+          <FontAwesome name="send" size={22} color="#000" />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback>
+        <Animated.View
+          style={[styles.subButton, styles.subMenu, questionAnimation]}
+        >
+          <AntDesign name="question" size={24} color="#000" />
+        </Animated.View>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback>
+        <Animated.View
+          style={[styles.subButton, styles.subMenu, heartAnimation]}
+        >
           <AntDesign name="hearto" size={24} color="#000" />
         </Animated.View>
       </TouchableWithoutFeedback>
@@ -75,18 +114,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#000",
     borderRadius: 50,
-    bottom: 10,
+  },
+  subMenu: {
+    position: "absolute",
+    right: 5,
   },
   subButton: {
-    width: 40,
-    height: 40,
-    marginRight: 5,
-    // position: "absolute",
-    elevation: 6,
     alignItems: "center",
     justifyContent: "center",
+    width: 40,
+    height: 40,
+    elevation: 6,
     backgroundColor: "#fff",
     borderRadius: 50,
-    bottom: 20,
+    bottom: 10,
   },
 });
