@@ -2,12 +2,21 @@ import React from "react";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { EvilIcons } from "@expo/vector-icons";
+import { EvilIcons, Ionicons } from "@expo/vector-icons";
 
 import Text from "../../components/Text";
 
 import { color } from "../../theme";
-import { Container, Menu, Header, Photo, Block } from "./styles";
+import {
+  Container,
+  Menu,
+  Header,
+  Photo,
+  Block,
+  BlockText,
+  Search,
+  Input,
+} from "./styles";
 
 import menu from "../../assets/icons/menu.png";
 import photo from "../../assets/photo.png";
@@ -30,11 +39,17 @@ const Home: React.FC = () => {
           <Photo source={photo} />
         </Block>
       </Header>
-
-      <Text color={color.text} size={32}>
-        Hi <Text font="Gilroy-ExtraBold">João,</Text>
-      </Text>
-      <Text color={color.text}>Let's Discover a New Adventure!</Text>
+      <BlockText>
+        <Text color={color.text} size={32} style={{ marginBottom: 10 }}>
+          Hi <Text font="Gilroy-ExtraBold">João,</Text>
+        </Text>
+        <Text color={color.text}>Let's Discover a New Adventure!</Text>
+      </BlockText>
+      <Search>
+        <EvilIcons name="search" size={32} color={color.primary} />
+        <Input placeholder="Search Hotels, Taxi, etc..." numberOfLines={1} />
+        <Ionicons name="ios-arrow-down" size={20} color={"#999"} />
+      </Search>
     </Container>
   );
 };

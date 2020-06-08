@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 
 export const Container = styled.View`
@@ -14,7 +15,7 @@ export const Menu = styled.Image`
 export const Photo = styled.Image`
   width: 50px;
   height: 50px;
-  margin-left: 10px;
+  margin-left: 20px;
   border-radius: 50px;
 `;
 
@@ -31,6 +32,23 @@ export const Block = styled.View`
   align-items: center;
 `;
 
-export const Text = styled.Text`
-  margin-right: 10px;
+export const BlockText = styled.View`
+  margin: 20px;
+  margin-left: 10px;
+  justify-content: space-around;
+`;
+
+export const Search = styled.View`
+  flex-direction: row;
+  background-color: rgba(238, 238, 238, 0.5);
+  align-items: center;
+  padding: 15px;
+  margin: 25px;
+  margin-top: 30px;
+  border-radius: 50px;
+`;
+
+export const Input = styled.TextInput`
+  margin-left: 10px;
+  width: 270px;
 `;
