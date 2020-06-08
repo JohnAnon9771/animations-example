@@ -10,7 +10,7 @@ interface Props {
   style?: StyleProp<TextStyle>;
 }
 
-const TextComponent: React.FC<Props> = ({
+export const TextComponent: React.FC<Props> = ({
   children,
   size,
   color,
@@ -41,5 +41,3 @@ const TextComponent: React.FC<Props> = ({
     );
   }
 };
-
-export default TextComponent;

@@ -33,9 +33,19 @@ export const Block = styled.View`
 `;
 
 export const BlockText = styled.View`
-  margin: 20px;
-  margin-left: 10px;
   justify-content: space-around;
+  margin: 20px;
+  margin-left: 15px;
+`;
+
+export const BlockCategory = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px;
+`;
+
+export const BlockFilter = styled.View`
+  flex-direction: row;
 `;
 
 export const Search = styled.View`

@@ -4,9 +4,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 
-import Text from "../../components/Text";
+import { TextComponent as Text } from "../../components/Text";
+import { Category } from "../../components/Category";
+import { Filter } from "../../components/Filter";
 
 import { color } from "../../theme";
+
 import {
   Container,
   Menu,
@@ -14,6 +17,8 @@ import {
   Photo,
   Block,
   BlockText,
+  BlockCategory,
+  BlockFilter,
   Search,
   Input,
 } from "./styles";
@@ -50,6 +55,42 @@ const Home: React.FC = () => {
         <Input placeholder="Search Hotels, Taxi, etc..." numberOfLines={1} />
         <Ionicons name="ios-arrow-down" size={20} color={"#999"} />
       </Search>
+      <BlockCategory>
+        <Category
+          backgroundColor={color.secondary}
+          color={color.text}
+          label="Flights"
+          icon="aircraft"
+        />
+        <Category
+          backgroundColor={color.orangeLight}
+          color={color.text}
+          label="Hotels"
+          icon="hotel"
+        />
+        <Category
+          backgroundColor={color.primary}
+          color={color.text}
+          label="Places"
+          icon="place"
+        />
+        <Category
+          backgroundColor={color.orange}
+          color={color.text}
+          label="Home"
+          icon="grid"
+        />
+      </BlockCategory>
+      <BlockText>
+        <Text color={color.text} size={32}>
+          Your <Text font="Gilroy-ExtraBold">Trips</Text>
+        </Text>
+      </BlockText>
+      <BlockFilter>
+        <Filter color={color.primary} label="Futured" isFocused />
+        <Filter color={color.primary} label="Past" />
+        <Filter color={color.primary} label="All" />
+      </BlockFilter>
     </Container>
   );
 };
