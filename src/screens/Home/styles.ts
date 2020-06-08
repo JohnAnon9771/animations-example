@@ -48,6 +48,12 @@ export const BlockFilter = styled.View`
   flex-direction: row;
 `;
 
+export const BlockCard = styled.View`
+  flex-direction: row;
+  /* justify-content: space-around; */
+  margin: 20px;
+`;
+
 export const Search = styled.View`
   flex-direction: row;
   background-color: rgba(238, 238, 238, 0.5);

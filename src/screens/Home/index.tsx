@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
 
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 
 import { TextComponent as Text } from "../../components/Text";
 import { Category } from "../../components/Category";
 import { Filter } from "../../components/Filter";
+import { Card } from "../../components/Card";
 
 import { color } from "../../theme";
 
@@ -19,12 +20,22 @@ import {
   BlockText,
   BlockCategory,
   BlockFilter,
+  BlockCard,
   Search,
   Input,
 } from "./styles";
 
 import menu from "../../assets/icons/menu.png";
 import photo from "../../assets/photo.png";
+import london from "../../assets/london.jpg";
+import italy from "../../assets/italia.jpg";
+import tokyo from "../../assets/tokyo.jpg";
+
+const data = [
+  { label: "london", subLabel: "UK", source: london },
+  { label: "Tokyo", subLabel: "Japan", source: tokyo },
+  { label: "Italy", subLabel: "Roma", source: italy },
+];
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
@@ -91,6 +102,21 @@ const Home: React.FC = () => {
         <Filter color={color.primary} label="Past" />
         <Filter color={color.primary} label="All" />
       </BlockFilter>
+      <FlatList
+        data={data}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <BlockCard>
+            <Card
+              label={item.label}
+              subLabel={item.subLabel}
+              color={color.text}
+              source={item.source}
+            />
+          </BlockCard>
+        )}
+      />
     </Container>
   );
 };
