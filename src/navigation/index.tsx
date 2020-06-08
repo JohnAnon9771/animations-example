@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -21,6 +20,7 @@ const Screens: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        cardStyle: { backgroundColor: "#fff" },
         headerShown: false,
       }}
     >
@@ -42,17 +42,20 @@ const CustomDrawerContent: React.FC<DrawerContentComponentProps> = ({
 
 export default () => {
   const [progress, setProgress] = useState(new Value<number>(0));
+
   const scale = interpolate(progress, {
     inputRange: [0, 1],
     outputRange: [1, 0.8],
   });
   const borderRadius = interpolate(progress, {
     inputRange: [0, 1],
-    outputRange: [0, 16],
+    outputRange: [0, 50],
   });
 
   return (
     <Drawer.Navigator
+      sceneContainerStyle={{ backgroundColor: "#fff" }}
+      overlayColor="transparent"
       drawerType="slide"
       drawerContent={(props) => {
         setProgress(props.progress);
