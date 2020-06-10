@@ -10,11 +10,25 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Animated from "react-native-reanimated";
 
 import Home from "../screens/Home";
+import Details from "../screens/Details";
+import { ImageSourcePropType } from "react-native";
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<StackParamList>();
 
 const { Value, interpolate } = Animated;
+
+export interface Data {
+  id: number;
+  label: string;
+  subLabel: string;
+  source: ImageSourcePropType;
+}
+
+type StackParamList = {
+  Home: undefined;
+  Details: Data;
+};
 
 const Screens: React.FC = () => {
   return (
@@ -25,6 +39,7 @@ const Screens: React.FC = () => {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
   );
 };

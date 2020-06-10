@@ -1,6 +1,14 @@
-import React from "react";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-import { TouchableOpacity, FlatList } from "react-native-gesture-handler";
+import React, { useContext } from "react";
+import { DrawerActions } from "@react-navigation/native";
+import {
+  FlatList,
+  TouchableNativeFeedback,
+} from "react-native-gesture-handler";
+import { StackScreenProps } from "@react-navigation/stack";
+
+import { Data } from "../../navigation";
+
+import { DataContext } from "../../context";
 
 import { EvilIcons, Ionicons } from "@expo/vector-icons";
 
@@ -27,26 +35,24 @@ import {
 
 import menu from "../../assets/icons/menu.png";
 import photo from "../../assets/photo.png";
-import london from "../../assets/london.jpg";
-import italy from "../../assets/italia.jpg";
-import tokyo from "../../assets/tokyo.jpg";
 
-const data = [
-  { label: "london", subLabel: "UK", source: london },
-  { label: "Tokyo", subLabel: "Japan", source: tokyo },
-  { label: "Italy", subLabel: "Roma", source: italy },
-];
+type ParamList = {
+  Home: undefined;
+  Details: Data;
+};
 
-const Home: React.FC = () => {
-  const navigation = useNavigation();
+type Props = StackScreenProps<ParamList, "Details">;
+
+const Home: React.FC<Props> = ({ navigation }) => {
+  const data = useContext(DataContext);
   return (
     <Container>
       <Header>
-        <TouchableOpacity
+        <TouchableNativeFeedback
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         >
           <Menu source={menu} style={{ tintColor: color.icons }} />
-        </TouchableOpacity>
+        </TouchableNativeFeedback>
         <Block>
           <EvilIcons name="location" size={24} color={color.icons} />
           <Text color={color.text}>
@@ -104,11 +110,13 @@ const Home: React.FC = () => {
       </BlockFilter>
       <FlatList
         data={data}
+        keyExtractor={(item) => `${item.id}`}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <BlockCard>
             <Card
+              id={item.id}
               label={item.label}
               subLabel={item.subLabel}
               color={color.text}

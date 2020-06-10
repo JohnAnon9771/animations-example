@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageSourcePropType } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { EvilIcons } from "@expo/vector-icons";
 
@@ -8,15 +9,26 @@ import { TextComponent as Text } from "../Text";
 import { Block, CardImage, CardText } from "./styles";
 
 interface Props {
+  id: number;
   source: ImageSourcePropType;
   color: string;
   label: string;
   subLabel: string;
 }
 
-export const Card: React.FC<Props> = ({ source, color, label, subLabel }) => {
+export const Card: React.FC<Props> = ({
+  id,
+  source,
+  color,
+  label,
+  subLabel,
+}) => {
+  const navigation = useNavigation();
+  const data = { id, source, color, label, subLabel };
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Details", { ...data })}
+    >
       <CardText>
         <Text
           font="Gilroy-ExtraBold"
