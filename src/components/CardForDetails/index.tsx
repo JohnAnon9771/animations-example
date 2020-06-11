@@ -25,16 +25,19 @@ export const CardForDetails: React.FC<Props> = ({
   icon,
   information,
 }) => {
+  const positionText = !information ? { bottom: -64 } : undefined;
+  const sizeIcon = 26;
+
   return (
     <TouchableOpacity onPress={() => {}}>
       <Block>
         <BlockIcon>
           {icon === "dot-circle" || icon === "map-marker-alt" ? (
-            <FontAwesome5 name={icon} color={color} size={26} />
+            <FontAwesome5 name={icon} color={color} size={sizeIcon} />
           ) : icon === "aircraft" ? (
-            <Entypo name={icon} color={color} size={26} />
+            <Entypo name={icon} color={color} size={sizeIcon} />
           ) : (
-            <Ionicons name={icon} color={color} size={26} />
+            <Ionicons name={icon} color={color} size={sizeIcon} />
           )}
         </BlockIcon>
         <BlockText>
@@ -52,7 +55,7 @@ export const CardForDetails: React.FC<Props> = ({
             color={Color.text}
             size={18}
             font="Gilroy-ExtraBold"
-            style={!information ? { bottom: -64 } : undefined}
+            style={positionText}
           >
             {label}
           </Text>
