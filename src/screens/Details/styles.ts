@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import Constants from "expo-constants";
+import { BaseButton } from "react-native-gesture-handler";
 
 export const Block = styled.View`
   margin-left: 30px;
@@ -17,7 +18,7 @@ export const BlockStar = styled.View`
   margin-top: 15px;
 `;
 
-export const GoBack = styled.View`
+export const GoBack = styled(BaseButton)`
   position: absolute;
   align-items: center;
   justify-content: center;
@@ -30,6 +31,7 @@ export const GoBack = styled.View`
 `;
 
 export const CardImage = styled.Image`
+  z-index: 1;
   width: 411.5px;
   height: 350px;
   border-bottom-left-radius: 50px;

@@ -1,14 +1,17 @@
 import React from "react";
-import { TouchableNativeFeedback } from "react-native-gesture-handler";
+import {
+  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { StatusBar } from "react-native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+
+import { Data } from "../../navigation/StackScreens";
 
 import { TextComponent as Text } from "../../components/Text";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { color } from "../../theme";
-
-import { Data } from "../../navigation/index";
 
 import { Block, BlockText, BlockStar, GoBack, CardImage } from "./styles";
 
@@ -28,10 +31,8 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
         translucent
         backgroundColor="transparent"
       />
-      <GoBack>
-        <TouchableNativeFeedback onPress={() => navigation.goBack()}>
-          <Ionicons name="ios-arrow-back" size={28} color={color.icons} />
-        </TouchableNativeFeedback>
+      <GoBack onPress={() => navigation.goBack()}>
+        <Ionicons name="ios-arrow-back" size={28} color={color.icons} />
       </GoBack>
       <CardImage source={source} />
       <Block>

@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import { DrawerActions } from "@react-navigation/native";
 import {
   FlatList,
-  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import { StackScreenProps } from "@react-navigation/stack";
-
-import { Data } from "../../navigation";
+import { Data } from "../../navigation/StackScreens";
 
 import { DataContext } from "../../context";
 
@@ -48,11 +47,11 @@ const Home: React.FC<Props> = ({ navigation }) => {
   return (
     <Container>
       <Header>
-        <TouchableNativeFeedback
+        <TouchableWithoutFeedback
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         >
           <Menu source={menu} style={{ tintColor: color.icons }} />
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
         <Block>
           <EvilIcons name="location" size={24} color={color.icons} />
           <Text color={color.text}>
