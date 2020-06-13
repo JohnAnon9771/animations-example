@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import {
   TapGestureHandler,
@@ -22,7 +22,7 @@ import map from "../../assets/map.png";
 import place from "../../assets/place.png";
 import sky2 from "../../assets/sky.jpg";
 
-import staranimation from "../../assets/staranimation.json";
+import starAnimation from "../../assets/staranimation.json";
 
 import {
   Block,
@@ -34,7 +34,7 @@ import {
   Container,
 } from "./styles";
 
-const { Value, event, useCode, cond, eq, call } = Animated;
+const { Value, event, useCode, cond, eq, call, block, and } = Animated;
 
 type ParamList = {
   Home: undefined;
@@ -45,13 +45,16 @@ type Props = StackScreenProps<ParamList, "Details">;
 
 const Details: React.FC<Props> = ({ route, navigation }) => {
   const { source, label, subLabel } = route.params;
+  const [active, setActive] = useState(false);
   const animationRef = useRef<LottieView>(null);
-  const gestureState = new Value(-1);
-  const onStateChange = event([
-    {
-      nativeEvent: { state: gestureState },
-    },
-  ]);
+
+  useEffect(() => {
+    if (active) {
+      animationRef.current?.play();
+    } else {
+      animationRef.current?.reset();
+    }
+  }, [active]);
 
   return (
     <>
@@ -75,13 +78,11 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
             </Text>
           </BlockText>
           <BlockStar>
-            <TouchableWithoutFeedback
-              onPress={() => animationRef.current?.play()}
-            >
+            <TouchableWithoutFeedback onPress={() => setActive(!active)}>
               <LottieView
                 style={{ width: 40, height: 40 }}
                 ref={animationRef}
-                source={staranimation}
+                source={starAnimation}
                 loop={false}
                 resizeMode="contain"
               />
