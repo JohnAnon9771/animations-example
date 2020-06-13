@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { ImageSourcePropType, StyleProp, ViewStyle } from "react-native";
+import { ImageSourcePropType, StyleProp } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Animated from "react-native-reanimated";
@@ -16,9 +16,10 @@ export interface Data {
   source: ImageSourcePropType;
 }
 
-type StackParamList = {
+export type StackParamList = {
   Home: undefined;
   Details: Data;
+  Tickets: undefined;
 };
 
 interface Props {

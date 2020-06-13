@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { StatusBar } from "react-native";
+import {
+  TapGestureHandler,
+  State,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import Animated from "react-native-reanimated";
+import LottieView from "lottie-react-native";
 
 import { StackScreenProps } from "@react-navigation/stack";
 import { Data } from "../../navigation/StackScreens";
@@ -15,6 +22,8 @@ import map from "../../assets/map.png";
 import place from "../../assets/place.png";
 import sky2 from "../../assets/sky.jpg";
 
+import staranimation from "../../assets/staranimation.json";
+
 import {
   Block,
   BlockText,
@@ -25,6 +34,8 @@ import {
   Container,
 } from "./styles";
 
+const { Value, event, useCode, cond, eq, call } = Animated;
+
 type ParamList = {
   Home: undefined;
   Details: Data;
@@ -33,7 +44,15 @@ type ParamList = {
 type Props = StackScreenProps<ParamList, "Details">;
 
 const Details: React.FC<Props> = ({ route, navigation }) => {
-  const { id, source, label, subLabel } = route.params;
+  const { source, label, subLabel } = route.params;
+  const animationRef = useRef<LottieView>(null);
+  const gestureState = new Value(-1);
+  const onStateChange = event([
+    {
+      nativeEvent: { state: gestureState },
+    },
+  ]);
+
   return (
     <>
       <StatusBar
@@ -56,7 +75,17 @@ const Details: React.FC<Props> = ({ route, navigation }) => {
             </Text>
           </BlockText>
           <BlockStar>
-            <AntDesign name="star" size={24} color={color.icons} />
+            <TouchableWithoutFeedback
+              onPress={() => animationRef.current?.play()}
+            >
+              <LottieView
+                style={{ width: 40, height: 40 }}
+                ref={animationRef}
+                source={staranimation}
+                loop={false}
+                resizeMode="contain"
+              />
+            </TouchableWithoutFeedback>
             <Text style={{ marginLeft: 5 }} color={color.text} size={16}>
               4.7
             </Text>

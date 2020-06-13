@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import Animated, { Node } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 
 import { CustomDrawerContent } from "./CustomDrawerContent";
 import { Screens } from "./StackScreens";
