@@ -1,11 +1,12 @@
 import React from "react";
-import { View } from "react-native";
-import Button from "./src/components/Button";
+import { NavigationContainer } from "@react-navigation/native";
+
+import Routes from "./src/navigation";
 
 export default function App() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button />
-    </View>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 }

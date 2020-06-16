@@ -8,7 +8,6 @@ import { Entypo } from "@expo/vector-icons";
 const {
   event,
   Value,
-  createAnimatedComponent,
   Clock,
   block,
   cond,
@@ -21,8 +20,6 @@ const {
   add,
   and,
 } = Animated;
-
-const AnimatedEntypo = createAnimatedComponent(Entypo);
 
 function runAnimationTiming(
   clock: Animated.Clock,
