@@ -1,26 +1,21 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import Home from "../screens/Home";
-import Logger from "../screens/Logger";
-import Documents from "../screens/Documents";
+import Button from "../screens/Button";
+import Cards from "../screens/Cards";
+import Documents from "../screens/Cards";
 import Settings from "../screens/Settings";
 
-import MyTabBar from "../components/TabBar";
-
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const Routes: React.FC = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      tabBar={(props) => <MyTabBar {...props} />}
-    >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Logger" component={Logger} />
-      <Tab.Screen name="Documents" component={Documents} />
-      <Tab.Screen name="Settings" component={Settings} />
-    </Tab.Navigator>
+    <Drawer.Navigator initialRouteName="Button">
+      <Drawer.Screen name="Button" component={Button} />
+      <Drawer.Screen name="Cards" component={Cards} />
+      {/* <Drawer.Screen name="Documents" component={Documents} />
+      <Drawer.Screen name="Settings" component={Settings} /> */}
+    </Drawer.Navigator>
   );
 };
 
