@@ -1,13 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Dimensions, Image } from "react-native";
 
-import { Tab } from "../../screens/Cards";
+import { Card } from "../../screens/Cards";
 
-export const TAB_COLUMNS = 2;
-export const TAB_SIZE = Dimensions.get("window").width / TAB_COLUMNS;
+export const CARD_COLUMNS = 2;
+export const CARD_SIZE = Dimensions.get("window").width / CARD_COLUMNS;
 
 const styles = StyleSheet.create({
-  container: { width: TAB_SIZE, height: TAB_SIZE },
+  container: { width: CARD_SIZE, height: CARD_SIZE },
   image: {
     ...StyleSheet.absoluteFillObject,
     width: undefined,
@@ -17,16 +17,14 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Props {
-  tab: Tab;
+export interface Props {
+  card: Card;
 }
 
-const Card: React.FC<Props> = ({ tab: { thumbnail } }) => {
+export default ({ card: { thumbnail } }: Props) => {
   return (
     <View style={styles.container}>
       <Image source={thumbnail} style={styles.image} />
     </View>
   );
 };
-
-export default Card;

@@ -1,14 +1,17 @@
 import React from "react";
-import { View, Text, Dimensions } from "react-native";
-import Card from "../../components/Card";
+import { View, Text, StyleSheet, ImageSourcePropType } from "react-native";
+import Animated from "react-native-reanimated";
 
-export interface Tab {
+import Card, { CARD_COLUMNS, CARD_SIZE } from "../../components/Card";
+import SortableTab from "../../components/SortableTab";
+
+export interface Card {
   id: number;
   name: string;
-  thumbnail: number;
+  thumbnail: ImageSourcePropType;
 }
 
-export const tabs: Tab[] = [
+export const tabs: Card[] = [
   {
     id: 1,
     name: "React Native",
@@ -36,10 +39,29 @@ export const tabs: Tab[] = [
   },
 ];
 
+const { Value } = Animated;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#1c1d1e",
+  },
+});
+
 const Cards: React.FC = () => {
+  const offsets = tabs.map((_, index) => ({
+    x: new Value(index % CARD_COLUMNS === 0 ? 0 : CARD_SIZE),
+    y: new Value(Math.floor(index / CARD_COLUMNS) * CARD_SIZE),
+  }));
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Card />
+    <View style={styles.container}>
+      {tabs.map((card, index) => (
+        <SortableTab
+          key={card.id}
+          card={card}
+          index={index}
+          offsets={offsets}
+        />
+      ))}
     </View>
   );
 };
