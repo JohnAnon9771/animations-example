@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import Animated from "react-native-reanimated";
-import { panGestureHandler } from "react-native-redash";
+import { panGestureHandler, withSpringTransition } from "react-native-redash";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 
 import { styles, CARD_WIDTH } from "../../components/CardForList";
@@ -29,6 +29,9 @@ const Card2: React.FC = () => {
   const x = withOffset(translation.x, state, offsetX);
   const y = withOffset(translation.y, state, offsetY);
 
+  const translateX = withSpringTransition(x, {}, velocity.x, state);
+  const translateY = withSpringTransition(y, {}, velocity.y, state);
+
   // const rotate = concat(
   //   translation.x.interpolate({
   //     inputRange: [0, CARD_WIDTH * 0.2],
@@ -42,7 +45,7 @@ const Card2: React.FC = () => {
         <Animated.View
           style={[
             styles.container,
-            { transform: [{ translateX: x, translateY: y }] },
+            { transform: [{ translateX, translateY }] },
           ]}
         >
           <Text>Hello world!</Text>
