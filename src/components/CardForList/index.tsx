@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Dimensions, Alert } from "react-native";
 import Animated from "react-native-reanimated";
 
 const { height, width } = Dimensions.get("window");
-export const CARD_HEIGHT = height / 4;
-export const CARD_WIDTH = width * 0.8;
+const CARD_HEIGHT = height / 4;
+const CARD_WIDTH = width * 0.8;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     height: CARD_HEIGHT,
     width: CARD_WIDTH,

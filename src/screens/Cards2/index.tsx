@@ -1,12 +1,15 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { styles } from "../../components/CardForList";
 
-const Logger: React.FC = () => {
+const Card2: React.FC = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Hello Logger!</Text>
+      <View style={styles.container}>
+        <Text>Hello world!</Text>
+      </View>
     </View>
   );
 };
 
-export default Logger;
+export default Card2;
