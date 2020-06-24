@@ -32,20 +32,20 @@ const Card2: React.FC = () => {
   const translateX = withSpringTransition(x, {}, velocity.x, state);
   const translateY = withSpringTransition(y, {}, velocity.y, state);
 
-  // const rotate = concat(
-  //   translation.x.interpolate({
-  //     inputRange: [0, CARD_WIDTH * 0.2],
-  //     outputRange: [0, 40],
-  //   }),
-  //   "deg"
-  // );
+  const rotate = concat(
+    interpolate(x, {
+      inputRange: [0, CARD_WIDTH * 0.2],
+      outputRange: [0, 20],
+    }),
+    "deg"
+  );
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <PanGestureHandler {...gestureHandler}>
         <Animated.View
           style={[
             styles.container,
-            { transform: [{ translateX, translateY }] },
+            { transform: [{ translateX, translateY }, { rotate }] },
           ]}
         >
           <Text>Hello world!</Text>

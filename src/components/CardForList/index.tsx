@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-const { add, Value, Extrapolate } = Animated;
+const { add, Value, Extrapolate, sub, interpolate } = Animated;
 
 interface Props {
   index: number;
@@ -26,9 +26,7 @@ interface Props {
 }
 
 const CardForList: React.FC<Props> = ({ index, y }) => {
-  // const position = subtract(index * CARD_HEIGHT, y);
-  // const position = new Value(0);
-
+  const position = sub(index * CARD_HEIGHT, y);
   const isDisappearing = -CARD_HEIGHT;
   const isTop = 0;
   const isBottom = height - CARD_HEIGHT;
@@ -36,20 +34,36 @@ const CardForList: React.FC<Props> = ({ index, y }) => {
   const translateY = add(
     y,
     y.interpolate({
-      inputRange: [0, 0.0001 + index * CARD_HEIGHT],
+      inputRange: [0, index * CARD_HEIGHT],
       outputRange: [0, -index * CARD_HEIGHT],
+      extrapolate: Extrapolate.CLAMP,
+    }),
+    interpolate(position, {
+      inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+      outputRange: [0.5, 1, 1, 0.5],
       extrapolate: Extrapolate.CLAMP,
     })
   );
 
-  // const scale = position.interpolate({
-  //   inputRange: [isDisappearing, isTop, isBottom, isAppearing],
-  //   outputRange: [0.5, 1, 1, 0.5],
-  //   extrapolate: "clamp",
-  // });
+  const scale = interpolate(position, {
+    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    outputRange: [0.5, 1, 1, 0.5],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const opacity = interpolate(position, {
+    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    outputRange: [0.5, 1, 1, 0.5],
+    extrapolate: Extrapolate.CLAMP,
+  });
 
   return (
-    <Animated.View style={[styles.container, { transform: [{ translateY }] }]}>
+    <Animated.View
+      style={[
+        styles.container,
+        { transform: [{ translateY }, { scale }], opacity },
+      ]}
+    >
       <Text>Hello world! index: {index}</Text>
       <Animated.Text>{y}</Animated.Text>
     </Animated.View>
