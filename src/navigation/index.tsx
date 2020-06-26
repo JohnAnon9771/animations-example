@@ -5,6 +5,7 @@ import Button from "../screens/Button";
 import Cards from "../screens/Cards";
 import Cards2 from "../screens/Cards2";
 import List from "../screens/Flatlist";
+import Block from "../screens/Block";
 
 const Drawer = createDrawerNavigator();
 
@@ -15,6 +16,7 @@ const Routes: React.FC = () => {
       <Drawer.Screen name="Cards" component={Cards} />
       <Drawer.Screen name="List" component={List} />
       <Drawer.Screen name="Cards2" component={Cards2} />
+      <Drawer.Screen name="Block" component={Block} />
     </Drawer.Navigator>
   );
 };
