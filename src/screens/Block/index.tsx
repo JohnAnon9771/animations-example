@@ -26,22 +26,29 @@ const styles = StyleSheet.create({
 const { Value, cond, eq, add, set } = Animated;
 
 function withOffset(
-  value: Animated.Value<number>,
-  state: Animated.Value<State>,
-  offset: Animated.Value<number>
+  translation: Animated.Value<number>,
+  state: Animated.Value<State>
 ) {
-  const safeOffset = new Value(0);
+  const start = new Value(0);
+  const dragging = new Value(0);
+  const position = new Value(0);
+
   return cond(
     eq(state, State.ACTIVE),
-    add(safeOffset, value),
-    set(safeOffset, value)
+    [
+      cond(eq(dragging, 0), [set(dragging, 1), set(start, position)]),
+      set(position, add(start, translation)),
+    ],
+    [set(dragging, 0), position]
   );
 }
 
+function stopWhenNeeded(params: type) {}
+
 const Block: React.FC = () => {
   const { gestureHandler, translation, state } = panGestureHandler();
-  const offsetX = new Value(0);
-  const x = withOffset(translation.x, state, offsetX);
+  const x = withOffset(translation.x, state);
+
   return (
     <View style={styles.container}>
       <PanGestureHandler {...gestureHandler}>
