@@ -15,6 +15,12 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     margin: 10,
+    shadowColor: "#7159c1",
+    shadowRadius: 10,
+    shadowOffset: {
+      height: CARD_HEIGHT,
+      width: CARD_WIDTH,
+    },
   },
 });
 
